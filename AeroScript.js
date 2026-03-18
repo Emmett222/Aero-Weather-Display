@@ -87,6 +87,10 @@ async function fetchWeather() {
             if (hour.shortForecast == "Mostly Cloudy") weatherP.innerHTML = `<h1 id="emoji">🌥️</h1>`;
             if (hour.shortForecast == "Cloudy") weatherP.innerHTML = `<h1 id="emoji">☁️</h1>`;
 
+            if (hour.shortForecast.includes("Rain")) weatherP.innerHTML = `<h1 id="emoji">🌧️</h1>`;
+            if (hour.shortForecast.includes("Thunderstorms")) weatherP.innerHTML = `<h1 id="emoji">⛈️</h1>`;
+            if (hour.shortForecast.includes("Snow")) weatherP.innerHTML = `<h1 id="emoji">🌨️</h1>`;
+
             weatherP.innerHTML += `<h1>${time}</h1>`;
             weatherP.innerHTML += `<h2>${hour.temperature}°${hour.temperatureUnit}</h2>`;
             //weatherP.innerHTML += `<h4>${hour.shortForecast}</h4>`;
