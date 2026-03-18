@@ -19,14 +19,14 @@ function updateTime() {
     if (!timeH1) return;
 
     const currentTime = new Date().toLocaleTimeString('en-US', {
-        hour: '2-digit',
+        hour: 'numeric',
         minute: '2-digit',
 
         month: 'long',
         day: 'numeric',
         year: 'numeric',
 
-        hour12: false
+        hour12: true
     });
     timeH1.textContent = currentTime;
 }
@@ -38,7 +38,11 @@ function updateTime() {
  */
 function getLocation() {
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: false,
+            timeout: 5000,             // 5 seconds
+            maximumAge: 3600000        // Hour
+        });
     });
 }
 
@@ -46,37 +50,41 @@ function getLocation() {
  * Gets the weather from NWS. Adds the weather to the site. Shows next 16 hours.
  */
 async function fetchWeather() {
-    const weatherP = document.getElementById("WeatherP");
-
-
     try {
         const position = await getLocation();
         const lat = position.coords.latitude.toFixed(4);
         const lon = position.coords.longitude.toFixed(4);
 
+        const headers = {
+            'User-Agent': 'AeroWeatherDisplay/1.0 (Web Browser)'
+        };
+
         // Get the weather.
-        const pointsResponse = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
+        const pointsResponse = await fetch(`https://api.weather.gov/points/${lat},${lon}`, { headers });
         if (!pointsResponse.ok) throw new Error("Could not find NWS grid for this location.");
-        
+
         const pointsData = await pointsResponse.json(); // Turn the points data to JSON.
 
         const forecastUrl = pointsData.properties.forecastHourly; // Hourly forecast url using the pointsData.
 
-        const forecastResponse = await fetch(forecastUrl); // Get the weather based off the points.
+        const forecastResponse = await fetch(forecastUrl, { headers }); // Get the weather based off the points.
         const forecastData = await forecastResponse.json(); // Turn the forecast to JSON.
 
         // v Uncomment for debugging. v
         // console.log("Full Forecast:", forecastData);
 
         const periods = forecastData.properties.periods; // Get the periods of time.
-        
-        weatherP.innerHTML = "<strong>Next 16 Hours:</strong><br>";
+
         for (let i = 0; i < 16; i++) { // Current hour to 15 hours from now.
+            const weatherP = document.getElementById("WeatherP" + i);
             const hour = periods[i];
             const time = new Date(hour.startTime).toLocaleTimeString([], { hour: 'numeric' });
-            
+
             // Append each hour to the text
-            weatherP.innerHTML += `${time}: ${hour.temperature}°${hour.temperatureUnit} - ${hour.shortForecast}<br>`;
+            //weatherP.innerHTML = `${time}: ${hour.temperature}°${hour.temperatureUnit} - ${hour.shortForecast}<br>`;
+            weatherP.innerHTML = `<h3>${time}</h3>`;
+            weatherP.innerHTML += `<h4>${hour.temperature}°${hour.temperatureUnit}</h4>`;
+            weatherP.innerHTML += `<h4>${hour.shortForecast}</h4>`;
         }
 
     } catch (error) {

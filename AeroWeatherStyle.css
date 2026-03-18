@@ -14,12 +14,18 @@ body {
     flex-direction: column;
 }
 
+/*
+    Background moving the gradient around
+*/
 @keyframes movingBackground {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/*
+    Time
+*/
 #timeContainer{
     width: 80vw;
     background-color: rgba(255, 255, 255, 0.15);
@@ -29,18 +35,47 @@ body {
 
     text-align: center;
 }
+#timeTitle {
+    font-size: 4vh;
+}
 
-#weatherContainer {
-    margin-top: 5vh;
-    width: 80vw;
+/*
+    Top row
+*/
+#weatherContainerTop {
+    margin-top: 3vh;
+    
+    display: flex;
+    flex-direction: row;
+}
+#weatherContainerTop > p {
+    margin: 0.5vw;
+    padding: 1vw;
+
+    width: 8vw;
+
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 1vh;
     border-style: inset;
     border-color: rgba(255, 255, 255, 0.5);
-
-    text-align: center;
 }
 
-#timeTitle {
-    font-size: 4vh;
+/*
+    Bottom row
+*/
+#weatherContainerBottom {
+    display: flex;
+    flex-direction: row;
 }
+#weatherContainerBottom > p {
+    margin: 0.5vw;
+    padding: 1vw;
+
+    width: 8vw;
+
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 1vh;
+    border-style: inset;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
