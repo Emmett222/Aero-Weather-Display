@@ -4,10 +4,31 @@ body {
 
     animation: movingBackground 10s ease infinite;
     height: 100vh;
+
+    color:white;
+    font-family: "Segoe UI", Arial, sans-serif;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes movingBackground {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+#WeatherBox {
+    width: 90vw;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 1vh;
+    border-style: inset;
+    border-color: rgba(255, 255, 255, 0.5);
+
+    text-align: center;
+}
+
+#Time {
+    font-size: 4vh;
 }
