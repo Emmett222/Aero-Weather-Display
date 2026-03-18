@@ -80,11 +80,17 @@ async function fetchWeather() {
             const hour = periods[i];
             const time = new Date(hour.startTime).toLocaleTimeString([], { hour: 'numeric' });
 
-            // Append each hour to the text
-            //weatherP.innerHTML = `${time}: ${hour.temperature}°${hour.temperatureUnit} - ${hour.shortForecast}<br>`;
-            weatherP.innerHTML = `<h3>${time}</h3>`;
-            weatherP.innerHTML += `<h4>${hour.temperature}°${hour.temperatureUnit}</h4>`;
-            weatherP.innerHTML += `<h4>${hour.shortForecast}</h4>`;
+            
+            if (hour.shortForecast == "Sunny") weatherP.innerHTML = `<h1 id="emoji">☀️</h1>`;
+            if (hour.shortForecast == "Mostly Clear") weatherP.innerHTML = `<h1 id="emoji">🌤️</h1>`;
+            if (hour.shortForecast == "Partly Cloudy") weatherP.innerHTML = `<h1 id="emoji">⛅</h1>`;
+            if (hour.shortForecast == "Mostly Cloudy") weatherP.innerHTML = `<h1 id="emoji">🌥️</h1>`;
+            if (hour.shortForecast == "Cloudy") weatherP.innerHTML = `<h1 id="emoji">☁️</h1>`;
+
+            weatherP.innerHTML += `<h1>${time}</h1>`;
+            weatherP.innerHTML += `<h2>${hour.temperature}°${hour.temperatureUnit}</h2>`;
+            //weatherP.innerHTML += `<h4>${hour.shortForecast}</h4>`;
+            weatherP.innerHTML += `<h4>Precipitation: ${hour.probabilityOfPrecipitation.value}%</h4>`;
         }
 
     } catch (error) {

@@ -28,10 +28,12 @@ body {
 */
 #timeContainer{
     width: 80vw;
+
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 1vh;
     border-style: inset;
     border-color: rgba(255, 255, 255, 0.5);
+    border-width: 0.5vh;
 
     text-align: center;
 }
@@ -44,20 +46,24 @@ body {
 */
 #weatherContainerTop {
     margin-top: 3vh;
-    
+
     display: flex;
     flex-direction: row;
 }
 #weatherContainerTop > p {
     margin: 0.5vw;
-    padding: 1vw;
+    padding: 0.5vw;
+    padding-top: 0;
 
     width: 8vw;
 
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 1vh;
     border-style: inset;
+    border-width: 0.5vh;
     border-color: rgba(255, 255, 255, 0.5);
+
+    text-align: center;
 }
 
 /*
@@ -69,13 +75,21 @@ body {
 }
 #weatherContainerBottom > p {
     margin: 0.5vw;
-    padding: 1vw;
+    padding: 0.5vw;
+    padding-top: 0;
 
     width: 8vw;
 
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 1vh;
     border-style: inset;
+    border-width: 0.5vh;
     border-color: rgba(255, 255, 255, 0.5);
+
+    text-align: center;
+}
+
+#emoji {
+    font-size: 4vw;;
 }
 
