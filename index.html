@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
-  <meta charset="utf-8">
-  <title>Aero Weather Display</title>
-  <link rel="stylesheet" href="AeroWeatherStyle.css" />
+    <meta charset="utf-8">
+    <title>Aero Weather Display</title>
+    <link rel="stylesheet" href="AeroWeatherStyle.css" />
 </head>
 
 <body>
-    <div id="WeatherBox">
-        <h1 id="Time"></h1>
-    </div>
-    <script src="AeroScript.js"></script>
-</body>
+    <div id="timeContainer">
+        <h1 id="timeTitle"></h1>
+        <div id="CurrentWeather">
 
+        </div>
+    </div>
+
+    <div id="weatherContainer">
+        <p id="WeatherP">
+            Loading. Please wait...
+        </p>
+    </div>
+
+    <script src="AeroScript.js"></script>
+
+</body>

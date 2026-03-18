@@ -11,6 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 @keyframes movingBackground {
@@ -19,7 +20,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-#WeatherBox {
+#timeContainer{
     width: 80vw;
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 1vh;
@@ -29,6 +30,17 @@ body {
     text-align: center;
 }
 
-#Time {
+#weatherContainer {
+    margin-top: 5vh;
+    width: 80vw;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 1vh;
+    border-style: inset;
+    border-color: rgba(255, 255, 255, 0.5);
+
+    text-align: center;
+}
+
+#timeTitle {
     font-size: 4vh;
 }
