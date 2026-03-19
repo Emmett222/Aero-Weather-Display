@@ -1,47 +1,40 @@
+/**
+ * Style for Aero Weather Display.
+ * 
+ * By Emmett Grebe
+ * Version: 3-19-2026
+ */
+
+:root {
+    --glass-background: linear-gradient(180deg,rgba(133, 133, 133, 0.1) 0%, rgba(207, 207, 207, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
+    --card-boxShadow: inset 0 0 10px #ffffff;
+    --swap1: swapAnimation1 30s linear infinite;
+    --swap2: swapAnimation2 30s linear infinite;
+}
+
 body {
-    background: linear-gradient(45deg, #66c7ed, #5ecc8c, #66e4ed);
-    background-size: 400% 400%;
-
-    animation: movingBackground 10s ease infinite;
-    height: 100vh;
-
-    color: white;
-    font-family: "Segoe UI";
-
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+
+    height: 100vh;
+
+    background: linear-gradient(45deg, #66c7ed, #5ecc8c, #66e4ed);
+    background-size: 400% 400%;
+    color: white;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+
+    animation: movingBackground 10s ease infinite;
 }
 
-/*
-    Background moving the gradient around
-*/
-@keyframes movingBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/*
-    Time
-*/
 #timeContainer {
     width: 80vw;
 
-    background: linear-gradient(180deg,rgba(133, 133, 133, 0.1) 0%, rgba(207, 207, 207, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
+    background: var(--glass-background);
     border-radius: 1vh;
     border-style: inset;
     border-width: 0.5vh;
-
     box-shadow: 10px 10px 50px 0px #ffffff;
 
     text-align: center;
@@ -51,60 +44,135 @@ body {
     font-size: 4vh;
 }
 
-/*
-    Top row
-*/
-#weatherContainerTop {
-    margin-top: 3vh;
+.main-weather-wrapper {
+    display: grid;
+    place-items: center;
+}
 
+#weatherContainerTop, #weekContainer {
+    grid-area: 1 / 1;
+}
+
+#weatherContainerTop {
     display: flex;
     flex-direction: row;
+    position: relative;
+
+    margin-top: 3vh;
+
+    animation: var(--swap2);
 }
 
 #weatherContainerTop>div {
+    width: 8vw;
+
     margin: 0.5vw;
     padding: 0.5vw;
     padding-left: 1vw;
     padding-right: 1vw;
 
-    width: 8vw;
-    box-shadow: inset 0 0 10px #ffffff;
-
-    background: linear-gradient(180deg,rgba(133, 133, 133, 0.1) 0%, rgba(207, 207, 207, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
-
+    background: var(--glass-background);
     border-radius: 1vh;
     border-style: inset;
     border-width: 0.5vh;
+    box-shadow: var(--card-boxShadow);
 
     text-align: center;
 }
 
-/*
-    Bottom row
-*/
 #weatherContainerBottom {
     display: flex;
     flex-direction: row;
+    position: relative;
+
+    z-index: 10;
 }
 
 #weatherContainerBottom>div {
+    width: 8vw;
+
     margin: 0.5vw;
     padding: 0.5vw;
     padding-left: 1vw;
     padding-right: 1vw;
 
-    width: 8vw;
-    box-shadow: inset 0 0 10px #ffffff;
-
-    background: linear-gradient(180deg,rgba(133, 133, 133, 0.1) 0%, rgba(207, 207, 207, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
+    background: var(--glass-background);
     border-radius: 1vh;
     border-style: inset;
     border-width: 0.5vh;
+    box-shadow: var(--card-boxShadow);
 
     text-align: center;
+
+    animation: var(--swap2);
+}
+
+#weekContainer {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    z-index: -1;
+    margin-top: -45vh;
+    transform: translateY(-215px);
+}
+
+#weekContainer>div {
+    width: 10vw;
+    height: 40vh;
+
+    margin: 0.5vw;
+    padding: 0.5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+
+    background: var(--glass-background);
+    border-radius: 1vh;
+    border-style: inset;
+    border-width: 0.5vh;
+    box-shadow: var(--card-boxShadow);
+
+    text-align: center;
+
+    animation: var(--swap1);
 }
 
 #emoji {
     font-size: 4vw;
-    ;
+}
+
+@keyframes movingBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes swapAnimation2 {
+    0%, 35% { 
+        opacity: 1; 
+        visibility: visible;
+    }
+    40%, 95% { 
+        opacity: 0; 
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1; 
+        visibility: visible;
+    }
+}
+
+@keyframes swapAnimation1 {
+    0%, 45% { 
+        opacity: 0; 
+        visibility: hidden;
+    }
+    50%, 85% { 
+        opacity: 1; 
+        visibility: visible;
+    }
+    90%, 100% { 
+        opacity: 0; 
+        visibility: hidden;
+    }
 }
