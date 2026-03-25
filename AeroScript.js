@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     backgroundCycle();
     updateTime();
     fetchWeather();
+    modalSetup();
 
     setInterval(updateTime, 1000);      // Every second update time.
     setInterval(fetchWeather, 900000);  // Every 15 minutes update the weather.
@@ -180,7 +181,7 @@ function backgroundCycle() {
 
     const now = new Date();
 
-    if ((now.getHours() > 20) && (now.getHours() < 7)) { // Between 8PM -> 7AM
+    if ((now.getHours() > 20) || (now.getHours() < 7)) { // Between 8PM -> 7AM
 
         body.style.background = nightBackground;
         body.style.backgroundSize = backgroundSize;      // Needs this because the color change shrinks the size.
@@ -206,4 +207,48 @@ function backgroundCycle() {
             card.style.borderColor = dayBorder;
         }
     }
+}
+
+/**
+ * Helper function to set up the eventListeners for the settings modal.
+ */
+function modalSetup() {
+    const modal = document.getElementById("settingsModal");
+    const saveBtn = document.getElementById("saveBtn");
+    const importBtn  = document.getElementById("importBtn");
+    const exportBtn  = document.getElementById("exportBtn");
+    const body = document.getElementById("body");
+
+    body.addEventListener("keypress", () => modal.showModal());
+    saveBtn.addEventListener('click', () => {
+        saveSettings();
+        modal.close();
+    });
+    importBtn.addEventListener('click', () => {
+        importSettings();
+    });
+    exportBtn.addEventListener('click', () => {
+        exportSettings();
+    });
+}
+
+/**
+ * Save settings in modal.
+ */
+function saveSettings() {
+
+}
+
+/**
+ * Import settings helper.
+ */
+function importSettings() {
+
+}
+
+/**
+ * Export settings helper.
+ */
+function exportSettings() {
+
 }
