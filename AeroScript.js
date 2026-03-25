@@ -2,13 +2,14 @@
  * Script for Aero Weather Display.
  * 
  * @author Emmett Grebe
- * @version 3-19-2026
+ * @version 3-25-2026
  */
 
 /**
  * On load updates time and updates weather, then updates time every second and updates weather every 15 minutes.
  */
 document.addEventListener('DOMContentLoaded', () => {
+    backgroundCycle();
     updateTime();
     fetchWeather();
 
@@ -112,7 +113,7 @@ async function fetchWeather() {
                 const low = nightPeriod ? nightPeriod.temperature : "N/A";
 
                 const emoji = getWeatherEmoji(period.shortForecast);
-                
+
                 const dayDiv = document.getElementById("day" + dayIndex);
                 if (dayDiv) {
                     if (period.name == "This Afternoon") {
@@ -124,7 +125,7 @@ async function fetchWeather() {
                         <h4>Precipitation: ${period.probabilityOfPrecipitation.value}%</h4>
                         `;
                     } else {
-                    dayDiv.innerHTML = `
+                        dayDiv.innerHTML = `
                         <h1 id="emoji">${emoji}</h1>
                         <h1><strong>${period.name}</strong></h1>
                         <h2>Day: ${high}°</h2>
@@ -144,7 +145,9 @@ async function fetchWeather() {
     }
 }
 
-// Helper function to keep the main loop clean
+/**
+ * Helper function to keep the main loop clean
+ */
 function getWeatherEmoji(forecast) {
     if (forecast.includes("Sunny")) return "☀️";
     if (forecast.includes("Mostly Clear")) return "🌤️";
@@ -155,4 +158,46 @@ function getWeatherEmoji(forecast) {
     if (forecast.includes("Thunderstorms")) return "⛈️";
     if (forecast.includes("Snow")) return "🌨️";
     return "🌡️"; // Default
+}
+
+/**
+ * Changes the background based on the time.
+ */
+function backgroundCycle() {
+    const dayBackground = "linear-gradient(45deg, #66c7ed, #5ecc8c, #66e4ed)"
+    const nightBackground = "linear-gradient(45deg, #224350, #2f6646, #285a5e)";
+    const dayBorder = "border-color: aquamarine";
+    const nightBorder = "rgb(73, 146, 122)";
+
+    const body = document.getElementById("body");
+    const timeContainer = document.getElementById("timeContainer");
+    const topCards = document.getElementById("weatherContainerTop").children;
+    const bottomCards = document.getElementById("weatherContainerBottom").children;
+
+    const now = new Date();
+
+    if ((now.getHours() > 20) && (now.getHours() < 7)) { // Between 8PM -> 7AM
+
+        body.style.background = nightBackground;
+
+        timeContainer.style.borderColor = nightBorder;
+
+        for (let card of topCards) {
+            card.style.borderColor = nightBorder;
+        }
+        for (let card of bottomCards) {
+            card.style.borderColor = nightBorder;
+        }
+    } else {                                             // Between 7AM -> 8PM
+        body.style.background = dayBackground;
+
+        timeContainer.style.borderColor = dayBorder;
+
+        for (let card of topCards) {
+            card.style.borderColor = dayBorder;
+        }
+        for (let card of bottomCards) {
+            card.style.borderColor = dayBorder;
+        }
+    }
 }
