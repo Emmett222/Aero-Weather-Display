@@ -170,6 +170,7 @@ function backgroundCycle() {
     const dayBorder = "border-color: aquamarine";
     const nightBackground = "linear-gradient(45deg, #224350, #2f6646, #285a5e)";
     const nightBorder = "rgb(73, 146, 122)";
+    const backgroundSize = "400% 400%";
 
     // Elements:
     const body = document.getElementById("body");
@@ -182,6 +183,7 @@ function backgroundCycle() {
     if ((now.getHours() > 20) && (now.getHours() < 7)) { // Between 8PM -> 7AM
 
         body.style.background = nightBackground;
+        body.style.backgroundSize = backgroundSize;      // Needs this because the color change shrinks the size.
 
         timeContainer.style.borderColor = nightBorder;
 
@@ -193,6 +195,7 @@ function backgroundCycle() {
         }
     } else {                                             // Between 7AM -> 8PM
         body.style.background = dayBackground;
+        body.style.backgroundSize = backgroundSize;      // Needs this because the color change shrinks the size.
 
         timeContainer.style.borderColor = dayBorder;
 
