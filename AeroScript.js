@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTime();
     fetchWeather();
 
-    setInterval(updateTime, 1000); // Every second update time.
-    setInterval(fetchWeather, 900000); // Every 15 minutes update the weather.
+    setInterval(updateTime, 1000);      // Every second update time.
+    setInterval(fetchWeather, 900000);  // Every 15 minutes update the weather.
     setInterval(backgroundCycle, 60000) // Every minute update cycle.
 });
 
@@ -165,11 +165,13 @@ function getWeatherEmoji(forecast) {
  * Changes the background based on the time.
  */
 function backgroundCycle() {
+    // Styles:
     const dayBackground = "linear-gradient(45deg, #66c7ed, #5ecc8c, #66e4ed)"
-    const nightBackground = "linear-gradient(45deg, #224350, #2f6646, #285a5e)";
     const dayBorder = "border-color: aquamarine";
+    const nightBackground = "linear-gradient(45deg, #224350, #2f6646, #285a5e)";
     const nightBorder = "rgb(73, 146, 122)";
 
+    // Elements:
     const body = document.getElementById("body");
     const timeContainer = document.getElementById("timeContainer");
     const topCards = document.getElementById("weatherContainerTop").children;
