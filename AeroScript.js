@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateTime, 1000); // Every second update time.
     setInterval(fetchWeather, 900000); // Every 15 minutes update the weather.
+    setInterval(backgroundCycle, 60000) // Every minute update cycle.
 });
 
 /**
