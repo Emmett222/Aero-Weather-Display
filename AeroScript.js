@@ -181,7 +181,7 @@ function backgroundCycle() {
 
     const now = new Date();
 
-    if ((now.getHours() > 20) || (now.getHours() < 7)) { // Between 8PM -> 7AM
+    if ((now.getHours() >= 20) || (now.getHours() < 7)) { // Between 8PM -> 6AM
 
         body.style.background = nightBackground;
         body.style.backgroundSize = backgroundSize;      // Needs this because the color change shrinks the size.
@@ -236,7 +236,7 @@ function modalSetup() {
  * Save settings in modal.
  */
 function saveSettings() {
-
+    
 }
 
 /**
