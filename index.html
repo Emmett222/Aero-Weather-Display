@@ -55,16 +55,33 @@
             </li>
             <li>
                 <div>
+                    <input type="checkbox" id="showSeconds">
+                    <label for="showSeconds">Show seconds</label>
+                    <input type="checkbox" id="showYear">
+                    <label for="showYear">Show year</label>
+                </div>
+            </li>
+            <hr>
+            <li>
+                <div>
                     <input type="checkbox" id="tempType">
                     <label for="tempType">Use Fahrenheit</label>
                 </div>
             </li>
+            <hr>
             <li>
                 <div>
                     <input type="checkbox" id="dayNight">
-                    <label for="dayNight">Day/Night background color cycle</label>
+                    <label for="dayNight">Cycle dark/light theme based on time</label>
+                    <br>
+                    <input type="text" id="light" placeholder="Theme becomes light at:">
+                    <label for="lightInput">(ex: <strong>7AM</strong>, ex: <strong>7</strong>)</label>
+                    <br>
+                    <input type="text" id="night" placeholder="Theme becomes dark at:">
+                    <label for="nightInput">(ex: <strong>8PM</strong>, ex: <strong>20</strong>)</label>
                 </div>
             </li>
+            <hr>
         </ul>
         <button id="saveBtn">Done</button>
         <button id="importBtn">Import Settings</button>

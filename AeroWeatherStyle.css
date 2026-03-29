@@ -153,6 +153,9 @@ body {
     border-radius: 1vh;
     border-style: inset;
     color: white;
+    padding: 2vw;
+    padding-right: 4.25vw;
+    font-size: 1vw;
 }
 #settingsModal>button {
     background: linear-gradient(149deg, #7bcbeb, #75ce9a, #8ae7ee);
@@ -160,6 +163,20 @@ body {
     border-radius: 0.75vh;
     border-style: inset;
     color: white;
+    padding: 0.5vw;
+    font-size: 1vw;
+}
+#saveBtn {
+    margin-left: 2vw;
+}
+#importBtn, #exportBtn {
+    margin-left: 2vw;
+}
+#settingsModal > ul {
+    list-style-type: none;
+}
+#settingsModal > ul > hr {
+    color: aquamarine;
 }
 
 @keyframes movingBackground {
