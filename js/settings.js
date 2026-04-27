@@ -6,6 +6,13 @@
  * @version 3-29-2026
  */
 
+// Default settings.
+export var twelveHour = true;
+export var showSeconds = true;
+export var showYear = true;
+
+export var useF = true;
+
 /**
  * Helper function to set up the eventListeners for the settings modal.
  */

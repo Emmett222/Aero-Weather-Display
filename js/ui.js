@@ -58,19 +58,26 @@ export function backgroundCycle() {
  * 
  * @returns Nothing.
  */
-export function updateTime() {
+export function updateTime(twelveHour, showSeconds, showYear) {
     const timeH1 = document.getElementById("timeTitle")
     if (!timeH1) return;
 
-    const currentTime = new Date().toLocaleTimeString('en-US', {
-        hour: 'numeric',            // Full digit, but not adding 0 to the front.
-        minute: '2-digit',          // Full digit, adds 0 to the front.
+    let options = {
+        hour: 'numeric',
+        minute: '2-digit',
+        month: 'long',
+        day: 'numeric',
+        
+        hour12: twelveHour
+    };
 
-        month: 'long',              // Full month string. e.g. March, May.
-        day: 'numeric',             // Full digit, but not adding 0 to the front.
-        year: 'numeric',            // Full digit, but not adding 0 to the front.
+    if (showSeconds) {
+        options.second = '2-digit'
+    }
 
-        hour12: true                // 12 hour clock. Shows AM and PM at the end.
-    });
-    timeH1.textContent = currentTime;
+    if (showYear) {
+        options.year = 'numeric';
+    }
+
+    timeH1.textContent = new Date().toLocaleTimeString('en-US', options);
 }
