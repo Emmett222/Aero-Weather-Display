@@ -24,7 +24,7 @@ export function getLocation() {
 /**
  * Gets the weather from NWS. Adds the weather to the site. Shows next 16 hours.
  */
-export async function fetchWeather() {
+export async function fetchWeather(twelveHour, useF) {
     try {
         const position = await getLocation();
         const lat = position.coords.latitude.toFixed(4);
@@ -53,15 +53,26 @@ export async function fetchWeather() {
             if (!weatherP) continue;
 
             const hour = hourlyPeriods[i];
-            const time = new Date(hour.startTime).toLocaleTimeString([], { hour: 'numeric' });
+            const time = new Date(hour.startTime).toLocaleTimeString([], {
+                hour: 'numeric',
+                hour12: twelveHour
+            });
             const emoji = getWeatherEmoji(hour.shortForecast);
 
+            // Determine temperature display based on useF
+            const tempDisplay = useF 
+                ? `${hour.temperature}°${hour.temperatureUnit}` 
+                : `${(((hour.temperature) - 32) * 5 / 9).toFixed(1)}°C`;
+
+            // Single template literal for cleaner code
             weatherP.innerHTML = `
                 <h1 id="emoji">${emoji}</h1>
                 <h1><em>${time}</h1>
-                <h2>${hour.temperature}°${hour.temperatureUnit}</h2>
-                <h4>Precipitation: ${hour.probabilityOfPrecipitation.value}%</h4>
+                <h2>${tempDisplay}</h2>
+                <h4>Precipitation: ${hour.probabilityOfPrecipitation.value || 0}%</h4>
             `;
+
+
         }
 
         // --- WEEKLY HIGH/LOW ---

@@ -12,6 +12,7 @@ import { modalSetup } from './settings.js';
 import { twelveHour } from './settings.js';
 import { showSeconds } from './settings.js';
 import { showYear } from './settings.js';
+import { useF } from './settings.js';
 
 /**
  * Runs on boot, once all the elements are finished loading.
@@ -21,13 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial calls:
     backgroundCycle();
     updateTime(twelveHour, showSeconds, showYear);
-    fetchWeather();
+    fetchWeather(twelveHour, useF);
     modalSetup();
 
     // Intervals:
     setInterval(() => {
         updateTime(twelveHour, showSeconds, showYear);
     }, 1000);      // Every second update time.
-    setInterval(fetchWeather, 900000);  // Every 15 minutes update the weather.
+    setInterval(() => {
+        fetchWeather(twelveHour, useF);
+    }, 900000);  // Every 15 minutes update the weather.
     setInterval(backgroundCycle, 60000) // Every minute update cycle.
 });
