@@ -40,7 +40,9 @@ export function modalSetup() {
  * Save settings in modal.
  */
 export function saveSettings() {
-    
+    twelveHour = document.getElementById("12hourCheckbox").checked;
+    showSeconds = document.getElementById("showSecondsCheckbox").checked;
+    showYear = document.getElementById("showYearCheckbox").checked;
 }
 
 /**
