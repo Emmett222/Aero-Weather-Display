@@ -3,7 +3,7 @@
  * Sets up the modal, then makes changes based on user input.
  * 
  * @author Emmett Grebe
- * @version 3-29-2026
+ * @version 4-27-2026
  */
 
 // Default settings.

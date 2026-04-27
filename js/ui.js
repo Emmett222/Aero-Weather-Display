@@ -3,7 +3,7 @@
  * Cycles the background based on time and updates the clock.
  * 
  * @author Emmett Grebe
- * @version 3-29-2026
+ * @version 4-27-2026
  */
 
 /**
