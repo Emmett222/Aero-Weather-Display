@@ -6,6 +6,8 @@
  * @version 4-27-2026
  */
 
+import { fetchWeather } from './api.js';
+
 // Default settings.
 export var twelveHour = true;
 export var showSeconds = true;
@@ -43,6 +45,10 @@ export function saveSettings() {
     twelveHour = document.getElementById("12hourCheckbox").checked;
     showSeconds = document.getElementById("showSecondsCheckbox").checked;
     showYear = document.getElementById("showYearCheckbox").checked;
+
+    useF = document.getElementById("tempType").checked;
+
+    fetchWeather(twelveHour, useF);
 }
 
 /**
