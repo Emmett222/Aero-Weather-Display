@@ -15,6 +15,8 @@ export var showYear = true;
 
 export var useF = true;
 
+export var doCycle = false;
+
 /**
  * Helper function to set up the eventListeners for the settings modal.
  */
@@ -47,6 +49,8 @@ export function saveSettings() {
     showYear = document.getElementById("showYearCheckbox").checked;
 
     useF = document.getElementById("tempType").checked;
+
+    doCycle = document.getElementById("dayNight").checked;
 
     fetchWeather(twelveHour, useF);
 }

@@ -9,7 +9,11 @@
 /**
  * Changes the background based on the time.
  */
-export function backgroundCycle() {
+export function backgroundCycle(doCycle) {
+    if (!doCycle) {
+        return;
+    }
+    
     // Styles:
     const dayBackground = "linear-gradient(45deg, #66c7ed, #5ecc8c, #66e4ed)"
     const dayBorder = "border-color: aquamarine";
