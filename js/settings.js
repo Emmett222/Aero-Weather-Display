@@ -72,5 +72,24 @@ export function importSettings() {
  * Export settings helper.
  */
 export function exportSettings() {
+    const settingsData = {
+        "twelveHour": twelveHour,
+        "showSeconds": showSeconds,
+        "showYear": showYear,
+        "useF": useF,
+        "doCycle": doCycle,
+        "lightTime": lightTime,
+        "darkTime": darkTime
+    }
 
+    const dataString = JSON.stringify(settingsData, null, 2);
+    const blob = new Blob([dataString], { type: "application/json" })
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "AeroWeatherSettings";
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
 }
