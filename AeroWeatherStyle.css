@@ -172,6 +172,19 @@ body {
 #importBtn, #exportBtn {
     margin-left: 2vw;
 }
+#importBtn {
+    background: linear-gradient(149deg, #7bcbeb, #75ce9a, #8ae7ee);
+    border-color: var(--default-border-color);
+    border-radius: 0.75vh;
+    border-style: inset;
+    color: white;
+    padding: 0.5vw;
+    font-size: 1vw;
+}
+#importSettings {
+    visibility: hidden;
+    width: 0;
+}
 #settingsModal > ul {
     list-style-type: none;
 }

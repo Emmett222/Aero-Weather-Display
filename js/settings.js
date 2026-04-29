@@ -26,8 +26,8 @@ export var darkTime;
 export function modalSetup() {
     const modal = document.getElementById("settingsModal");
     const saveBtn = document.getElementById("saveBtn");
-    const importBtn  = document.getElementById("importBtn");
-    const exportBtn  = document.getElementById("exportBtn");
+    const importSettings = document.getElementById("importSettings");
+    const exportBtn = document.getElementById("exportBtn");
     const body = document.getElementById("body");
 
     body.addEventListener("keypress", () => modal.showModal());
@@ -35,7 +35,7 @@ export function modalSetup() {
         saveSettings();
         modal.close();
     });
-    importBtn.addEventListener('click', () => {
+    importSettings.addEventListener('change', () => {
         importSettings();
     });
     exportBtn.addEventListener('click', () => {
@@ -65,7 +65,31 @@ export function saveSettings() {
  * Import settings helper.
  */
 export function importSettings() {
+    const fileInput = document.getElementById('importSettings');
 
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        // This runs once the file is fully read
+        reader.onload = (e) => {
+            try {
+                // Convert the string back into a JS Object
+                const settings = JSON.parse(e.target.result);
+
+                // Apply your settings to the app
+                console.log("Settings Loaded:", settings);
+                applySettings(settings);
+            } catch (err) {
+                console.error("Error parsing JSON:", err);
+                alert("Invalid settings file.");
+            }
+        };
+
+        reader.readAsText(file);
+    });
 }
 
 /**
