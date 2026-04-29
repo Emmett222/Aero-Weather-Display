@@ -7,17 +7,18 @@
  */
 
 import { fetchWeather } from './api.js';
+import { backgroundCycle } from './ui.js';
 
 // Default settings.
-export var twelveHour = true;
-export var showSeconds = true;
-export var showYear = true;
+export var twelveHour;
+export var showSeconds;
+export var showYear;
 
-export var useF = true;
+export var useF;
 
-export var doCycle = false;
-export var lightTime = 7;
-export var darkTime = 20;
+export var doCycle;
+export var lightTime;
+export var darkTime;
 
 /**
  * Helper function to set up the eventListeners for the settings modal.
