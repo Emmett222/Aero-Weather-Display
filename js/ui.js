@@ -9,7 +9,7 @@
 /**
  * Changes the background based on the time.
  */
-export function backgroundCycle(doCycle) {
+export function backgroundCycle(doCycle, lightTime, darkTime) {
     if (!doCycle) {
         return;
     }

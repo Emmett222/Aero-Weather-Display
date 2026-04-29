@@ -3,7 +3,7 @@
  * Sets up the modal, then makes changes based on user input.
  * 
  * @author Emmett Grebe
- * @version 4-27-2026
+ * @version 4-29-2026
  */
 
 import { fetchWeather } from './api.js';
@@ -16,6 +16,8 @@ export var showYear = true;
 export var useF = true;
 
 export var doCycle = false;
+export var lightTime = 7;
+export var darkTime = 20;
 
 /**
  * Helper function to set up the eventListeners for the settings modal.
@@ -51,8 +53,11 @@ export function saveSettings() {
     useF = document.getElementById("tempType").checked;
 
     doCycle = document.getElementById("dayNight").checked;
+    lightTime = document.getElementById("light").value;
+    darkTime = document.getElementById("night").value;
 
     fetchWeather(twelveHour, useF);
+    backgroundCycle(doCycle, lightTime, darkTime)
 }
 
 /**

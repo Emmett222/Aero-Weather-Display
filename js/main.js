@@ -14,6 +14,8 @@ import { showSeconds } from './settings.js';
 import { showYear } from './settings.js';
 import { useF } from './settings.js';
 import { doCycle } from './settings.js';
+import { lightTime } from './settings.js';
+import { darkTime } from './settings.js';
 
 /**
  * Runs on boot, once all the elements are finished loading.
@@ -21,7 +23,7 @@ import { doCycle } from './settings.js';
  */
 document.addEventListener('DOMContentLoaded', () => {
     // Initial calls:
-    backgroundCycle(doCycle);
+    backgroundCycle(doCycle, lightTime, darkTime);
     updateTime(twelveHour, showSeconds, showYear);
     fetchWeather(twelveHour, useF);
     modalSetup();
@@ -34,6 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchWeather(twelveHour, useF);
     }, 900000);  // Every 15 minutes update the weather.
     setInterval(() => {
-        fetchWeather(doCycle);
+        backgroundCycle(doCycle, lightTime, darkTime);
     }, 60000); // Every minute update cycle.
 });
