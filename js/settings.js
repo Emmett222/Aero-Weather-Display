@@ -26,7 +26,7 @@ export var darkTime;
 export function modalSetup() {
     const modal = document.getElementById("settingsModal");
     const saveBtn = document.getElementById("saveBtn");
-    const importSettings = document.getElementById("importSettings");
+    const importSettingsBtn = document.getElementById("importSettings");
     const exportBtn = document.getElementById("exportBtn");
     const body = document.getElementById("body");
 
@@ -35,8 +35,8 @@ export function modalSetup() {
         saveSettings();
         modal.close();
     });
-    importSettings.addEventListener('change', () => {
-        importSettings();
+    importSettingsBtn.addEventListener('change', (event) => {
+        importSettings(event);
     });
     exportBtn.addEventListener('click', () => {
         exportSettings();
@@ -64,32 +64,38 @@ export function saveSettings() {
 /**
  * Import settings helper.
  */
-export function importSettings() {
-    const fileInput = document.getElementById('importSettings');
+export function importSettings(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-    fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
+    const reader = new FileReader();
 
-        const reader = new FileReader();
+    // This runs once the file is fully read
+    reader.onload = (e) => {
+        try {
+            // Convert the string back into a JS Object
+            const settings = JSON.parse(e.target.result);
+            document.getElementById("12hourCheckbox").checked = settings.twelveHour;
+            document.getElementById("showSecondsCheckbox").checked = settings.showSeconds;
+            document.getElementById("showYearCheckbox").checked = settings.showYear;
 
-        // This runs once the file is fully read
-        reader.onload = (e) => {
-            try {
-                // Convert the string back into a JS Object
-                const settings = JSON.parse(e.target.result);
+            document.getElementById("tempType").checked = settings.useF;
 
-                // Apply your settings to the app
-                console.log("Settings Loaded:", settings);
-                applySettings(settings);
-            } catch (err) {
-                console.error("Error parsing JSON:", err);
-                alert("Invalid settings file.");
-            }
-        };
+            document.getElementById("dayNight").checked = settings.doCycle;
+            document.getElementById("light").value = settings.lightTime;
+            document.getElementById("night").value = settings.darkTime;
 
-        reader.readAsText(file);
-    });
+            // Apply your settings to the app
+            console.log("Settings Loaded:", settings);
+            //applySettings(settings);
+            saveSettings();
+        } catch (err) {
+            console.error("Error parsing JSON:", err);
+            alert("Invalid settings file.");
+        }
+    };
+
+    reader.readAsText(file);
 }
 
 /**
@@ -97,13 +103,13 @@ export function importSettings() {
  */
 export function exportSettings() {
     const settingsData = {
-        "twelveHour": twelveHour,
-        "showSeconds": showSeconds,
-        "showYear": showYear,
-        "useF": useF,
-        "doCycle": doCycle,
-        "lightTime": lightTime,
-        "darkTime": darkTime
+        "twelveHour": document.getElementById("12hourCheckbox").checked,
+        "showSeconds": document.getElementById("showSecondsCheckbox").checked,
+        "showYear": document.getElementById("showYearCheckbox").checked,
+        "useF": document.getElementById("tempType").checked,
+        "doCycle": document.getElementById("dayNight").checked,
+        "lightTime": document.getElementById("light").value,
+        "darkTime": document.getElementById("night").value
     }
 
     const dataString = JSON.stringify(settingsData, null, 2);
