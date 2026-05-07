@@ -29,7 +29,7 @@ export function backgroundCycle(doCycle, lightTime, darkTime) {
 
     const now = new Date();
 
-    if ((now.getHours() >= 20) || (now.getHours() < 7)) { // Between 8PM -> 6AM
+    if ((now.getHours() >= darkTime) || (now.getHours() < lightTime)) {
 
         body.style.background = nightBackground;
         body.style.backgroundSize = backgroundSize;      // Needs this because the color change shrinks the size.
@@ -42,7 +42,7 @@ export function backgroundCycle(doCycle, lightTime, darkTime) {
         for (let card of bottomCards) {
             card.style.borderColor = nightBorder;
         }
-    } else {                                             // Between 7AM -> 8PM
+    } else {                                   
         body.style.background = dayBackground;
         body.style.backgroundSize = backgroundSize;      // Needs this because the color change shrinks the size.
 
